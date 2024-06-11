@@ -3,7 +3,11 @@ server {
     server_name {{ server_name }};
 
     location / {
+    {% if server_ssl_port == 443 %}
         rewrite ^ https://$http_host$request_uri? permanent;  # force redirect http to https
+    {% else %}
+        rewrite ^ https://$http_host:{{ server_ssl_port }}$request_uri? permanent;  # force redirect http to https
+    {% endif %}
     }
     location /.well-known/ {
         # file per challenge letsencrypt
