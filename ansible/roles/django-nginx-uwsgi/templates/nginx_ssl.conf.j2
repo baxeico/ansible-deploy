@@ -1,5 +1,5 @@
 server {
-    listen 80 default_server;
+    listen {{ server_port }} default_server;
     server_name {{ server_name }};
 
     location / {
@@ -12,7 +12,7 @@ server {
 }
 
 server {
-    listen 443 ssl;
+    listen {{ server_ssl_port }} ssl;
     server_name {{ server_name }};
 
     ssl_certificate     /etc/letsencrypt/live/{{ server_name }}/fullchain.pem;
@@ -20,7 +20,7 @@ server {
 
     location / {
         # django
-        uwsgi_pass unix:///run/uwsgi/app/{{ server_name }}/socket;
+        uwsgi_pass unix:///run/uwsgi/app/{{ uwsgi_config_filename }}/socket;
         include uwsgi_params;
         uwsgi_read_timeout 300s;
         client_max_body_size 32m;

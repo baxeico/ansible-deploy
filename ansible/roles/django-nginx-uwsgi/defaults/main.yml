@@ -1,3 +1,7 @@
 ---
 # defaults file for django-nginx-uwsgi
 nginx_config_variant: basic
+nginx_config_filename: "{{ server_name }}"
+server_port: 80
+server_ssl_port: 443
+uwsgi_config_filename: "{{ server_name }}"

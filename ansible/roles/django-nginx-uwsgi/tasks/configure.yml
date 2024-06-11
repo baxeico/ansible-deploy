@@ -4,21 +4,21 @@
 - name: create media_root dir
   file: path={{ media_dir }} state=directory mode=0777
 - name: create commands_log_path dir
-  file: path={{ commands_log_path }} state=directory mode=0755
+  file: path={{ commands_log_path }} state=directory mode=0777
 - name: remove default nginx configuration
   file: path=/etc/nginx/sites-enabled/default state=absent
 - name: nginx config file
   become: True
   template:
     src: "{{ role_path }}/templates/nginx_{{ nginx_config_variant }}.conf.j2"
-    dest: "/etc/nginx/sites-enabled/{{ server_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ nginx_config_filename }}"
   notify:
     - restart nginx
 - name: uwsgi config file
   become: True
   template:
     src: "{{ role_path }}/templates/uwsgi.ini.j2"
-    dest: "/etc/uwsgi/apps-enabled/{{ server_name }}.ini"
+    dest: "/etc/uwsgi/apps-enabled/{{ uwsgi_config_filename }}.ini"
   notify:
     - restart uwsgi
 - name: cron config
