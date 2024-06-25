@@ -5,3 +5,4 @@ nginx_config_filename: "{{ server_name }}"
 server_port: 80
 server_ssl_port: 443
 uwsgi_config_filename: "{{ server_name }}"
+cron_config_filename: django_cron
