@@ -3,6 +3,7 @@ chdir = {{ django_dir }}
 env = DJANGO_SETTINGS_MODULE={{ django_project }}.settings.{{ deploy_environment }}
 virtualenv = {{ virtualenv_path }}
 wsgi-file = {{ django_project }}/wsgi.py
+touch-reload = {{ django_dir }}/{{ django_project }}/wsgi.py
 workers = {{ uwsgi_workers }}
 {% if uwsgi_max_requests is defined %}
 max-requests = {{ uwsgi_max_requests }}
