@@ -22,4 +22,5 @@
       - libpq-dev
       - postgresql-client
       - python3-psycopg2
+      - acl
     state: present

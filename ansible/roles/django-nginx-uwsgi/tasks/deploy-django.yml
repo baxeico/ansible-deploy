@@ -9,6 +9,8 @@
       synchronize:
         src: "{{ django_src_path }}"
         dest: "{{ django_dir }}"
+        owner: false
+        group: false
         delete: true
       notify:
         - restart uwsgi
@@ -32,6 +34,8 @@
       synchronize:
         src: "{{ python_requirements_path }}"
         dest: "{{ requirements_dir }}"
+        owner: false
+        group: false
         delete: true
     - name: Install Python requirements
       pip:
