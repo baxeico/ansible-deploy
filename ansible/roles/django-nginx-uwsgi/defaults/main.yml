@@ -2,6 +2,7 @@
 # defaults file for django-nginx-uwsgi
 nginx_config_variant: basic
 nginx_config_filename: "{{ server_name }}"
+nginx_client_max_body_size: 32m
 server_port: 80
 server_ssl_port: 443
 uwsgi_config_filename: "{{ server_name }}"
