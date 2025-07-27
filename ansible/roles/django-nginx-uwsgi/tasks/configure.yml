@@ -23,6 +23,7 @@
   template:
     src: "{{ role_path }}/templates/nginx_{{ nginx_config_variant }}.conf.j2"
     dest: "/etc/nginx/sites-enabled/{{ nginx_config_filename }}"
+    mode: '0644'
   notify:
     - restart nginx
 - name: uwsgi config file
@@ -30,6 +31,7 @@
   template:
     src: "{{ role_path }}/templates/uwsgi.ini.j2"
     dest: "/etc/uwsgi/apps-enabled/{{ uwsgi_config_filename }}.ini"
+    mode: '0644'
   notify:
     - restart uwsgi
 - name: cron config
@@ -37,4 +39,5 @@
   template:
     src: "{{ cron_template_path }}"
     dest: "/etc/cron.d/{{ cron_config_filename }}"
+    mode: '0644'
   when: cron_template_path is defined
