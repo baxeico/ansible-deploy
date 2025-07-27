@@ -14,6 +14,10 @@
       priv: "ALL"
       no_password_changes: "yes"
       role_attr_flags: "NOSUPERUSER,NOCREATEDB"
+  - name: Set database owner
+    postgresql_db:
+      name: "{{ dbname }}"
+      owner: "{{ dbuser }}"
   - name: Ensure DB user password is correct
     command: "psql -c \"ALTER ROLE {{ dbuser }} WITH PASSWORD '{{ dbpassword }}';\""
   - name: Add postgis extension to DB
