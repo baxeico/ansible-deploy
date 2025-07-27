@@ -1,4 +1,14 @@
 ---
+- name: Create home directory
+  become: True
+  file:
+    path: '{{ home_dir }}'
+    state: directory
+    owner: '{{ ansible_env.USER }}'
+    group: '{{ ansible_env.USER }}'
+    mode: '0755'
+- name: Create project directory
+  file: path={{ root_dir }} state=directory mode=0755
 - name: create static_root dir
   file: path={{ static_dir }} state=directory mode=0755
 - name: create media_root dir
@@ -6,6 +16,7 @@
 - name: create commands_log_path dir
   file: path={{ commands_log_path }} state=directory mode=0777
 - name: remove default nginx configuration
+  become: True
   file: path=/etc/nginx/sites-enabled/default state=absent
 - name: nginx config file
   become: True
