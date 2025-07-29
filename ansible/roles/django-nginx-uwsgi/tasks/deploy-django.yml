@@ -24,6 +24,7 @@
       template:
         src: "{{ django_env_template_path }}"
         dest: "{{ django_dir }}/.env"
+        mode: '0644'
       when: django_env_template_path is defined
     - name: Copy setenv file in Django directory
       template:
